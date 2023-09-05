@@ -22,3 +22,4 @@
   2. Identify the Root ports on non-root bridge
   3. Identify the Designated port for each segment
   4. Set alternate ports to blocking state
+![Uploading image.png…]()
