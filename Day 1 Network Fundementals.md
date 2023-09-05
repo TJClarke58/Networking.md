@@ -176,3 +176,51 @@
 - Error Handling and Diagnostics
   -The network layer uses special helper protocols like ICMP and ARP that allow logically connected devices to exchange information about the status of the network or devices themselves.
 
+## Internet Protocol Versions
+- The network layer deals in two version of IP and ICMP, version 4 and version 6
+- IP layer protocols to include IPv4, IPv6, ICMP, IGMP, and various Routing Protocols
+- IPv6 features, addressing etc.
+
+## IPv4 Header
+(Field Name  -  Bit Range  -  Length 	-  Description)
+1. Version  -  0-3  -   4 bits  -  Represents the IP version of the packet—Always 4 in IPv4.
+2. Internet Header Length  -  4-7  -  4 bits  -  Represents the number of 32-bit (4-byte) words in the header. If IHL is greater than 5, it indicates that IP options are present.
+3. Differentiated Service Code Point (Multiply by 4 to get ECN)  -  8-13  -  6 bits  -  Indicates the type of traffic that is being passed (e.g., VoIP, Video).
+4. Explicit Congestion Notification  -  14-15  -  2 bits  -  ECN is used to provide end-to-end traffic congestion notification; usually 0.
+5. Total Length  -  16-31  -  16 bits  -  Represents the size of the entire IP packet in bytes, including the IP header. The minimum value would be 20 (0x0014, in hex). The max value is 65,535.
+6. Identification  -  32-47  -  16 bits  -  Used to identify fragmented packets.
+7. Flags  -  48-50  -  3 bits  -  The flags field is used for fragmentation of IP packets. The first bit (at offset 48) is reserved and must be zero. The second bit (at offset 49) is the Don’t-Fragment flag. The third bit (at offset 50) is the More-Fragments flag.
+8. Fragment Offset  -  51-63  -  13 bits  -  Identifies the offset of a fragmented packet’s position, relative to the original packet, in multiples of 8 bytes.
+9. Time To Live  -  64-71  -  8 bits  -  Determines the maximum number of times a packet may be forwarded. Each router that forwards a packet decrements the TTL by one.
+10. Protocol  -  72-79  -  8 bits  -  Identifies the protocol header that is used in the encapsulated payload. Uses IP protocol codes, e.g., TCP = 6 (0x06).
+11. Header Checksum  -  80-95  -  16 bits  -  The checksum is calculated from the IP header only. Can be used to indicate tampering or corruption.
+12. Source Address  -  96-127  -  32 bits  -  Source IPv4 address of the packet.
+13. Destination Address  -  128-159  -  32 bits  -  Destination IPv4 address of the packet.
+14. Options  -  160-256  -  128 bits  -  Options present if IHL > 5. Can range from 6 to 15 WORDS
+
+## Fragmentation Process
+- IP fragmentation breaks up a single IPv4 packet into multiple smaller packets. Every link in a network has a defined maximum transmission unit (MTU).
+- In IPv4, routing devices perform fragmentation if the total size of the packet (header and data) coming from one network interface is greater than the MTU of the network out the exiting interface
+- IPv4 Flags: Starting at byte offset 6, A 3 bit field declares if the packet is a part of a fragmented data frame or not.
+  - Bit 0: reserved, should always be 0. See RFC 3514 for a description of the “evil bit.”
+  - Bit 1: 0 = May Fragment, 1 = Don’t Fragment this packet
+  - Bit 2: 0 = Last Fragment, 1 = More Fragments follow.
+- Fragmantation math to find offset
+  - (MTU - IHL) / 8 = OFFSET (IN BYTES)
+
+## IPv6 Header (LOOK AT STUDENT FG)
+
+## Fingerprinting
+- Sometimes you can analyze a header and make an educated guess at which operating system sent the packet by your TTL maximum hops.
+
+## ICMP Header (LOOK AT STUDENT FG)
+
+## ZERO CONFIGURATION
+- IPv4 Auto Configuration
+  - * APIPA
+  - * RFC 3927
+- IPv6 auto configuration
+  - * SLAAC (StateLess Address Auto-configuration)
+  - * RFC 4862
+
+## Transport Layer (OSI Layer 4)
