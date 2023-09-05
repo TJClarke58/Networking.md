@@ -370,39 +370,78 @@
 
 ## TELNET (TCP 23)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/3137b621-3c54-4e3c-8e2a-6ae4bf650b86)
+- Messages:
+  - Telnet Commands
+  - Telnet options
 
 ## SMTP (TCP 25)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/705d3e73-ca08-455e-99bb-08c06696ce09)
+- Messages:
+  - SMTP Commands
+  - SMTP Responses
 
 ## TACACS (TCP 49) SIMPLE/EXTENDED
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/434b2925-bdfc-4305-9a35-7aa470a78239)
 
 ## HTTP(S) (TCP 80/443)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/ca5d0996-9f8f-482b-b937-7ba87b682eb1)
+- Messages:
+  - Methods
+    - GET / HEAD / POST / PUT
+  - HTTP status Codes
+    - 100, 200, 300, 400
 
 ## POP (TCP 110)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/cb20feca-6a10-4b97-a386-24fd0b7472ed)
+- Messages:
+  - POP Commands
+  - POP Replies
+  - POP Capabilities
 
 ## IMAP (TCP 143)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/617684aa-b746-4b8d-baaf-3120db86c9b8)
+- Messages:
+  - IMAP Commands
+  - IMAP Status Response
+  - IMAP Capabilities
 
 ## RDP (TCP 3389)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/5a075341-3af6-442a-bb97-3bf693ec1f76)
-
+- Compression or Encryption support
+- Desktop size and color depth
+- Keyboard Mapping
+- Remote system control
+- Mouse-cursor color properties
+  
 ## DNS (QUERY/RESPONSE) (TCP/UDP 53)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/2559232a-8b82-4f30-bfe5-c07806694dda)
 
 ## DHCP (UDP 67/68)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/bfef2bbf-32fc-43aa-840b-6717bcdffe7d)
+- Discover
+- Offer
+- Request
+- Acknowledge
 
 ## TFTP (UDP 69)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/622c8642-4354-4ae8-8453-bffb3a0b36c9)
+- Messages:
+  - TFTP Opcodes
+  - TFTP Error Codes
 
 ## NTP (UDP 123)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/d1ae822b-19c2-48d3-9723-8d536c4f46df)
 
 ## SNMP (UDP 161/162)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/8fd97f58-cfc8-4e4e-ac33-8b8c51f0fd65)
+- 7 Message Types:
+  - Get Request
+  - Set Request
+  - Get Next
+  - Get Bulk
+  - Response
+  - Trap
+  - Inform
 
 ## RADIUS (UDP 1645/1646 AND 1812/1813)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/3c422ad8-c8ad-4f6c-ae82-6490bcfce687)
