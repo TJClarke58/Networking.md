@@ -51,3 +51,38 @@
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/80972f2e-906b-40c8-a986-4c84ecc46b00)
 
 # LAYER 3 ROUTING TECHNOLOGIES
+- ROUTING
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/b9c610ad-437f-444b-9902-2d04ce4cfc27)
+- Routing Table
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/2162de72-4aa2-4db1-9a27-e52aa11705c3)
+- ANATOMY
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/192b0082-f337-422f-88ce-45678e08e000)
+  - Ultimate route is any routing table entry that has a next-hop IPv4 address, exit interface, or both.
+  - Level 1 route is any route with the subnet mask (CIDR) is equal to or less than the classful mask of the network address. A level 1 route can be a:
+    - Network route - A network route that has a subnet mask equal to that of the classful mask.
+      - Class A - 255.0.0.0 (/8)
+      - Class B - 255.255.0.0 (/16)
+      - Class C - 255.255.255.0 (/24)
+    - Supernet route - A network route with a mask less (smaller) than the classful mask.
+    - Default route - A default route is a static route with the address 0.0.0.0/0.
+  - Parent route is a level 1 network that is subnetted. A parent route will never be an ultimate route.
+  - Level 2 child route are the subnets of a classful network address.
+
+## LOOKUP PROCESS 
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/c3a3bc62-5ec0-4a7b-865a-657460cb67db)
+
+## ROUTED VS ROUTING
+- Routed protocol is a protocol that allows data to be routed
+- Routing Protocol are used by routers communicate routing information with each other
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/fc6c4ad0-b4a2-4caa-9d90-82937a161ba7)
+
+## FIRST HOP REDUNDANCY PROTOCOLS
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/0332b740-3150-4c0f-a1b1-0a3fe1b16985)
+
+## ADMINISTRATIVE DISTANCE 
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/da305137-12de-401d-a72f-749d5904b49b)
+- RIP = Hop count
+- EIGRP = Bandwidth, Delay, Load, Reliability
+- OSPF = Cost (Bandwidth)
+- IS-IS = Cost (Assigned by Admin)
+- BGP = Policy assigned my Admin
