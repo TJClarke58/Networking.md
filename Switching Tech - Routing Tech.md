@@ -156,6 +156,44 @@ Policy assigned my Admin
   - IGRP: First generation Cisco proprietary protocol (obsolete and replaced by EIGRP)
   - EIGRP: Advanced version of distance vector routing
 
+## LINK STATE
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/6a31148e-72e1-4aa2-8449-124377e13887)
+- Link-state protocols work best in situations where:
+  - The network design is hierarchical, usually occurring in large networks
+  - Fast convergence of the network is crucial
+  - The administrators have good knowledge of the implemented link-state routing protocol
+- There are two link-state IPv4 IGPs:
+  - OSPF: Popular open standards-based routing protocol
+  - IS-IS: Popular in service provider networks
 
+## BGP
+- Road-map of the Internet
+- Routes traffic between Autonomous System (AS) Number
+- Advertises IP CIDR address blocks
+- Establishes Peer relationships
+- Complicated configuration
+- Complicated and slow path selection
 
+## BGP OPERATION
+- How BGP chooses the best path:
+  - Advertise a more specific route. 192.168.1.0 /24 is more specific than 192.168.0.0 /16.
+  - Offer a shorter route to certain blocks of IP addresses. A route to ip prefix with 4 AS 'hops" is better than route with 5 AS 'hops'
+
+## BGP HIJACKING
+- Illegitimate advertising of addresses
+- BGP propagates false information
+- Purpose:
+  - stealing prefixes
+  - monitoring traffic
+  - intercept (and possibly modify) Internet traffic
+  - 'black holing' traffic
+  - perform MitM
+
+## BGP HIJACKING DEFENSE
+- IP prefix filtering
+- BGP hijacking detection
+  - Tracking the change in TTL of incoming packets
+  - Increased Round Trip Time (RTT) which increases latency
+  - Monitoring misdirected traffic (change in AS path from tools like Looking Glass)
+- BGPSec
 
