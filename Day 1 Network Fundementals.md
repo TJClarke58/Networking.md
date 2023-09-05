@@ -8,7 +8,7 @@
   - bit is a binary representation of the smallest set of information in a computer
   - A collection of these bits must be used to store large amounts of information
 
-- Binary Types (# of bits)
+- Binary Types (# of bits)TCP Header
   - 1 = bit/flag
   - 4 = nibble
   - 8 = byte/octet
@@ -238,5 +238,13 @@
 
 ## TCP Header
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/80397692-e6de-438d-8b84-e043aa0da211)
-![image](https://github.com/TJClarke58/Networking.md/assets/140441047/0845ae70-5b71-42af-a3f7-1afb15030c30)
+
+## TCP Flags 
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/fd6e02b4-3efc-4015-8934-a47227c273cb)
+
+## TCP States
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/0556ab73-c7e0-4880-975f-ddd5a9411a9d)
+
+## TCP Connections
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/39641f55-bebc-4463-89e5-e55b601655fc)
 
