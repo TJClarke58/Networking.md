@@ -224,3 +224,17 @@
   - * RFC 4862
 
 ## Transport Layer (OSI Layer 4)
+- Connection-oriented (TCP-Segments-Unicast traffic)
+  - requires that a connection with specific agreed-upon parameters be established before data is sent.
+  - provides segmentation and sequencing.
+  - provides connection establishment and acknowledgments.
+  - provides flow control (or windowing).
+  - Identify common application layer protocols or functions that rely on TCP.
+- Connection-less (UDP-Datagrams-Broadcast, Multicast, Unicast Traffic)
+  - requires no connection before data is sent
+  - provides no ordering, duplicate protection or delivery guarantee
+  - does provide integrity checking
+  - Identify common application layer protocols or functions that rely on UDP
+
+## TCP Header
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/80397692-e6de-438d-8b84-e043aa0da211)
