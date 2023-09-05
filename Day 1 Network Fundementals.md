@@ -238,3 +238,5 @@
 
 ## TCP Header
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/80397692-e6de-438d-8b84-e043aa0da211)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/0845ae70-5b71-42af-a3f7-1afb15030c30)
+
