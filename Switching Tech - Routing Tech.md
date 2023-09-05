@@ -20,7 +20,25 @@
 - Root decision process
   1. Elect root Bridge
   2. Identify the Root ports on non-root bridge
-  3. Identify the Designated port for each segment
+  3. Identify the Designated port for each segmentRIP
+
+Hop count
+
+EIGRP
+
+Bandwidth, Delay, Load, Reliability
+
+OSPF
+
+Cost (Bandwidth)
+
+IS-IS
+
+Cost (Assigned by Admin)
+
+BGP
+
+Policy assigned my Admin
   4. Set alternate ports to blocking state
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/16830423-faf8-4ee3-ba3f-7434fba5903f)
 
@@ -80,9 +98,64 @@
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/0332b740-3150-4c0f-a1b1-0a3fe1b16985)
 
 ## ADMINISTRATIVE DISTANCE 
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/625375e1-ebbc-4fbc-a8f0-132746b56f23)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/da305137-12de-401d-a72f-749d5904b49b)
 - RIP = Hop count
 - EIGRP = Bandwidth, Delay, Load, Reliability
 - OSPF = Cost (Bandwidth)
 - IS-IS = Cost (Assigned by Admin)
 - BGP = Policy assigned my Admin
+
+- Some of the most common metrics that routing protocols can use are:
+  - hop
+  - bandwidth
+  - delay
+  - reliability
+  - load
+  - MTU
+  - cost
+  - administratively defined
+ 
+## STATIC ROUTING
+- Static routes are manually configured on each router by a network administrator to route traffic for every specific remote network.
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/5d6f91f4-cd8a-4dab-86d8-3ffad4f9a50f)
+
+## STATIC ROUTING ADVANTAGES AND DISADVANTAGES
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/870c8e9f-8fff-40aa-a6e1-e56c8af88891)
+
+## DYNAMIC ROUTING
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/8288f20b-ac64-49d1-8865-da09056af1ba)
+- The purpose of dynamic routing protocols includes:
+  - Discover new remote networks
+  - Maintaining current routing information
+  - Choose best path to remote networks
+  - Recalculate a new patch to a remote network should the primary fail
+
+## DYNAMIC ROUTING ADVANTAGES AND DISADVANTAGES
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/edf8c5c6-ad3e-4dd3-a0e6-2662ae1201dd)
+
+## ROUTING PROTOCOL COMPARISON
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/7c07169b-5303-445c-ac59-75569dc25418)
+
+## IGP vs EGP
+- Interior Gateway Protocols (IGP): Routing protocols that are used within an AS. Referred to as intra-AS routing. Organizations and service providers IGPs on their internal networks. IGPs include RIP, EIGRP, OSPF, and IS-IS.
+- Exterior Gateway Protocols (EGP): Used primarily for routing between autonomous systems. Referred to as inter-AS routing. Service providers and large companies will interconnect their AS using an EGP. The Border Gateway Protocol (BGP) is the only currently viable EGP and is the official routing protocol used by the Internet.
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/706fc1aa-158c-4975-923d-2b52ef99b91c)
+
+## CONTROLLING ENTITIES
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/bd023180-8ab5-4317-8d44-53442ae202a9)
+
+## DISTANCE VECTOR
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/a843164c-51c5-4f4b-a54d-3ac976b3ddf1)
+- Distance Vector protocols are simplistic in their operation. They share entire routing tables with their directly connected neighbors and from these shared tables they determine two factors:
+  - Distance: This identifies how far away the destination network is from the router and is based on a metric such as the hop count, cost, bandwidth, delay, and more. It takes the learned distance from their neighbor, adds the distance to their neighbor, and this gives them a total distance.
+  - Vector: This specifies the direction to the remote network. The router that advertised the route to the router is the one the router will need to send traffic to that will get the traffic to the remote network and the interface it was learned on.
+- There are four distance vector IPv4 IGPs:
+  - RIPv1: First generation legacy protocol
+  - RIPv2: Simple distance vector routing protocol
+  - IGRP: First generation Cisco proprietary protocol (obsolete and replaced by EIGRP)
+  - EIGRP: Advanced version of distance vector routing
+
+
+
+
