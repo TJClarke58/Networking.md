@@ -247,4 +247,33 @@
 
 ## TCP Connections
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/39641f55-bebc-4463-89e5-e55b601655fc)
+- Connection establishment
+  - 3-way Handshake
+    - SYN, SYN-ACK, ACK
+- Data Transfer
+  - During the ESTABLISHED state communication can go in either direction. Data can be either set to or pulled from the server
+    - PSH-ACK (Server is sending data to client so it turns on the PSH flag)
+    - ACK
+- Connection Termination
+  - 4-way termination.
+    - FIN-ACK - Initiator will set the FIN flag to inform the other end that it is closing its end of the connection. It will set its SEQ number to the next incrementing number.
+    - ACK - Receiver will set the ACK flag and ACK’s the initiator’s SEQ number +1 in the ACK field.
+    - FIN-ACK - Receiver then initiates its connection termination buy setting the FIN flag and setting its own SEQ number in the SEQ field.
+    - ACK - Original initiator then sets the ACK flag and ACK’s the receiver’s SEQ number +1 in the ACK field. SEQ number will be the next incrementing SEQ number.
 
+- TCP Options:
+  - Option 0 - End of Options List
+  - Option 1 - No Options or NOP
+  - Option 2 - Maximum Segment Size (MSS)
+  - Option 3 - TCP Window Scaling
+
+## UDP Header
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/a5a9e3f6-262b-4c28-8c4d-4f0b1a9afee1)
+
+## Session Layer (OSI Layer 5)
+- Session Layer — The main purpose of this layer is to maintain the state of your ongoing connections. This state is not used in a connection-less protocol.
+  - This layer provides the capabilities to open, close and manage sessions between the application layer processes
+  - The communication at this layer consist of requests and responses that occur between the local and remote applications
+  - Session-layer makes use of remote procedure calls (RPCs), Net-Beui, SOCKS, SMB, WINS, named-pipes, PPTP and other protocols
+
+    
