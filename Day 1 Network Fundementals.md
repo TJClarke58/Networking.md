@@ -272,8 +272,135 @@
 
 ## Session Layer (OSI Layer 5)
 - Session Layer — The main purpose of this layer is to maintain the state of your ongoing connections. This state is not used in a connection-less protocol.
-  - This layer provides the capabilities to open, close and manage sessions between the application layer processes
+  - This layer￼ provides the capabilities to open, close and manage sessions between the application layer processes
   - The communication at this layer consist of requests and responses that occur between the local and remote applications
   - Session-layer makes use of remote procedure calls (RPCs), Net-Beui, SOCKS, SMB, WINS, named-pipes, PPTP and other protocols
 
-    
+## Protocols
+
+### Socks 4/5 (TCP 1080) (SOCK 5 SUPPORTS UDP)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/f9ca7c74-7283-4846-9edd-65d5f5b9b6f4)
+- Initiates connections through a proxy
+- Uses various Client / Server exchange messages
+- Client can provide authentication to server
+- Client can request connections from server
+
+### PPTP (TCP 1723)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/969e34cd-c331-49e2-af5b-e8fa2c280daf)
+
+### L2TP (TCP 1701)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/e003f7f6-4d97-48fa-966b-c7573bc27b91)
+
+### SMB/CIFS (TCP 139/445 AND UDP 137/138)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/d4b101fa-327c-44ce-bcee-667a142c9d15)
+- Allowed devices to establish connections to other devices on network to share files, printers and other things.
+- SMB Rides over Netbios - allows applications to communicate over a LAN using a NetBIOS name. Depricated due to DNS. Netbios Wiki
+  - Netbios Dgram Service - UDP 138
+  - Netbios Session Service - TCP 139
+- SAMBA and CIFS are just flavors of SMB
+
+### RPC (Any Port)
+- RPC is a request/response protocol.
+- User application will:
+  - Sends a request for information to a external server
+  - Receives the information from the external server
+  - Display collected data to User
+
+## Presentation Layer (OSI Layer 6)
+- Presentation Layer — This layer deals with the Translating, Formatting, Encryption, and Compression of data.
+  - Translation - The presentation layer is responsible for interoperability between encoding methods as different computers use different encoding methods. It translates data between the formats the network requires and the format at the computer.
+  - Formatting - This layer is responsible to put the file in a format that is readable. Such as:
+    - ASCII or EBCDIC
+    - .doc, .ppt or .xls
+    - mp3 or wav
+    - avi or mp4
+    - bmp, jpeg, gif, tiff or png
+  - Encryption This is the layer the encryption and decryption gets carried out.
+    - Symetric: AES, Blowfish, Twofish, DES, and RC4
+    - Asymetric: PKI, Deffie-Hellman, DSS, RSA, Elliptic curve
+  - Compression Sometimes data gets to big to transmit over the network so The Presentation layer handles compression.The primary role of Data compression is to reduce the number of bits to be transmitted. It is important in transmitting multimedia such as audio, video, text etc.
+    - Zip, TAR, RAR, 7zip, CAB
+
+## Application Layer (OSI Layer 7)
+- FTP (TCP 20/21)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/42f1fd78-da2e-4b82-ae42-34f38efb9882)
+- FTP
+  - File Transfer Protocol is a standard network protocol that is used for file transfer between a client and a server.
+
+## FTP Active
+- Active
+  - A client initiates a connection with a server on port 21 from the client’s ephemeral high port.
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/678790cf-5677-4fd0-bb7a-9dc927bad5de)
+
+## FTP Passive
+- Passive
+  - Passive FTP sidesteps the issue of Active mode by reversing the conversation. The client initiates both the command and data connections.
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/5a6f2615-a957-4f2d-a727-38815056a8bb)
+
+## SSH (TCP 22)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/a3a78447-b858-4409-9bb1-e64b3f2fdbb1)
+- Messages provide:
+  - Client/server authentication
+  - Asymmetric or PKI for key exchange
+  - Symmetric for session
+  - User authentication
+  - Data stream channeling
+
+## SSH Architecture
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/60768d40-247f-42d4-acc0-dc38e57b8e87)
+- Server = Known as sshd in most linux SSH implementations, this allows incoming SSH connections and handles authentication and authorization
+- Client = This is the program that connects to the SSH server for a request, examples include scp and ssh
+- Session = The client and server conversation that begins after successful mutual authentication.
+- Keys
+  - User Key - Asymmetric public key used to identify the user to the server
+  - Host Key - Asymmetric public key used to identify the server to the user
+  - Session Key - Symmetric key created by the client and server to protect the session’s communication.
+- Key Generator = Creates user keys and host keys via ssh-keygen
+- Known-hosts database = Collection of host keys that the client and server refer to for mutual authentication.
+- Agent = Stores keys in memory as a convenience for users to not input pass-phrases repetitively.
+- Signer = This is a program that signs the host-based authentication packets.
+- Random Seed = Random data used for entropy in creating pseudo-random numbers
+- Configuration File = Settings that exist on either the client or server that dictate functionality for ssh or sshd respectively
+
+## SSH IMPLEMENTATION CONCERNS
+- Using password authentication only
+- Key rotation
+- Key management
+- Implementation specification (libssh, sshtrangerthings)
+
+## TELNET (TCP 23)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/3137b621-3c54-4e3c-8e2a-6ae4bf650b86)
+
+## SMTP (TCP 25)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/705d3e73-ca08-455e-99bb-08c06696ce09)
+
+## TACACS (TCP 49) SIMPLE/EXTENDED
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/434b2925-bdfc-4305-9a35-7aa470a78239)
+
+## HTTP(S) (TCP 80/443)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/ca5d0996-9f8f-482b-b937-7ba87b682eb1)
+
+## POP (TCP 110)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/cb20feca-6a10-4b97-a386-24fd0b7472ed)
+
+## IMAP (TCP 143)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/617684aa-b746-4b8d-baaf-3120db86c9b8)
+
+## RDP (TCP 3389)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/5a075341-3af6-442a-bb97-3bf693ec1f76)
+
+## DNS (QUERY/RESPONSE) (TCP/UDP 53)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/2559232a-8b82-4f30-bfe5-c07806694dda)
+
+## DHCP (UDP 67/68)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/bfef2bbf-32fc-43aa-840b-6717bcdffe7d)
+
+## TFTP (UDP 69)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/622c8642-4354-4ae8-8453-bffb3a0b36c9)
+
+## NTP (UDP 123)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/d1ae822b-19c2-48d3-9723-8d536c4f46df)
+
+
+
+
