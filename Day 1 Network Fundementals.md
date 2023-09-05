@@ -341,8 +341,8 @@
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/a3a78447-b858-4409-9bb1-e64b3f2fdbb1)
 - Messages provide:
   - Client/server authentication
-  - Asymmetric or PKI for key exchange
-  - Symmetric for session
+  - Asymmetric or PKI for key exchange (Encyrpting the session)
+  - Symmetric for session (actual conversation key) 
   - User authentication
   - Data stream channeling
 
@@ -400,6 +400,16 @@
 
 ## NTP (UDP 123)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/d1ae822b-19c2-48d3-9723-8d536c4f46df)
+
+## SNMP (UDP 161/162)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/8fd97f58-cfc8-4e4e-ac33-8b8c51f0fd65)
+
+## RADIUS (UDP 1645/1646 AND 1812/1813)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/3c422ad8-c8ad-4f6c-ae82-6490bcfce687)
+
+## RTP (UDP any above 1023)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/e203f9cf-b969-4b28-99c5-efefd48c64cd)
+
 
 
 
