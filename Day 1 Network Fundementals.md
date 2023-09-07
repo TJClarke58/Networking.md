@@ -182,6 +182,8 @@
 - IPv6 features, addressing etc.
 
 ## IPv4 Header
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/13c4a3ab-c983-4781-90fb-63fde49b9d2e)
+
 (Field Name  -  Bit Range  -  Length 	-  Description)
 1. Version  -  0-3  -   4 bits  -  Represents the IP version of the packet—Always 4 in IPv4.
 2. Internet Header Length  -  4-7  -  4 bits  -  Represents the number of 32-bit (4-byte) words in the header. If IHL is greater than 5, it indicates that IP options are present.
