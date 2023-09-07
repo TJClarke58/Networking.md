@@ -67,6 +67,9 @@ Example: sudo tcpdump -i eth0 -XXn 'not port 22 && not port 23'
 ## BITWISE MASKING
 - To filter down to the bit(s) and not just the byte.
   - ip[0] & 0x0F > 0x05
+    ip ver | IHL
+    1111 | 0101
+    0000 | 1111
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/1137d1e6-13c2-4a94-8698-06c3f5573c88)
 
 ## FILTER LOGIC - MOST EXCLUSIVE
@@ -76,5 +79,16 @@ Example: sudo tcpdump -i eth0 -XXn 'not port 22 && not port 23'
   --or--
   tcp[13] & 0xFF = 0x11
   ```
-![image](https://github.com/TJClarke58/Networking.md/assets/140441047/4ece6bb1-1134-4acc-88ef-28a6ccb17251)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/ae497023-c71b-4bcc-adf4-6c9798115454)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/83db63b9-4aa0-4590-b63e-e17d88cf9c5c)
 
+
+## FILTER LOGIC - LESS EXCLUSIVE
+- All designated bits must be set; all others may be set
+  - tcp[13] & 0x11 = 0x11
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/89edfd26-de54-454c-88f7-1325629c87e4)
+
+## FILTER LOGIC - LEAST EXCLUSIVE
+- At least one of the designated bits must be set to not equal 0; all others may be set
+  - tcp[13] & 0x11 !=0
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/e12ec486-137f-4fb2-bac8-5cfb15eb1096)
