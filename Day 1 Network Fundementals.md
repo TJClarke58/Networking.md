@@ -211,6 +211,8 @@
   - (MTU - IHL) / 8 = OFFSET (IN BYTES)
 
 ## IPv6 Header (LOOK AT STUDENT FG)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/b5621941-5437-41e0-ac57-0a91bb858f29)
+
 
 ## Fingerprinting
 - Sometimes you can analyze a header and make an educated guess at which operating system sent the packet by your TTL maximum hops.
