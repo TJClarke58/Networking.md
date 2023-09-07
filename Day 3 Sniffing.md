@@ -82,6 +82,13 @@ Example: sudo tcpdump -i eth0 -XXn 'not port 22 && not port 23'
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/ae497023-c71b-4bcc-adf4-6c9798115454)
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/83db63b9-4aa0-4590-b63e-e17d88cf9c5c)
 
+- Source Address
+  - ip[12:4]& 0xFFFFFFFF = 0x0A0A0028 (most exclusive)
+  - ip[12:4]& 0xFFFFFF00 = 0x0A0A0028 (Lest Exculsive, only looks at 3 octets)
+- IP Header (DSCP and ECN)
+  - ip[1]& 0xFC = 80
+- IP Header (Flags / fragment)
+  - (ip[6]& E0 = 0x20 || ip[6:2]& 0x1FFF > 0)
 
 ## FILTER LOGIC - LESS EXCLUSIVE
 - All designated bits must be set; all others may be set
