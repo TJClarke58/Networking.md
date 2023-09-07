@@ -76,4 +76,5 @@ Example: sudo tcpdump -i eth0 -XXn 'not port 22 && not port 23'
   --or--
   tcp[13] & 0xFF = 0x11
   ```
-![image](https://github.com/TJClarke58/Networking.md/assets/140441047/39c6d9f6-2f87-47fa-a897-35303a06349a)
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/4ece6bb1-1134-4acc-88ef-28a6ccb17251)
+
