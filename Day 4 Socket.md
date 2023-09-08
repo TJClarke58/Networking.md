@@ -86,3 +86,12 @@ socket.socket([*family*[,*type*[*proto*]]])
 - Avoiding defense mechanisms
 - Obfuscating data during transfer
 - Manually crafting a packet with the chosen data in header fields
+
+## ENCODING AND DECODING
+- Encoding
+  - The process of taking bits and converting them using a specified cipher.
+- Decoding
+  - Reverse of the conversion process used by the specified cipher for encoding.
+- Common encoding schemes
+  - UTF-8 (default), Base64, Hex
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/1d2f2f72-d824-43f0-ad72-4f2ba92b90ad)
