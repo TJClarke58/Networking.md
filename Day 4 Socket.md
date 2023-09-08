@@ -61,7 +61,28 @@ socket.socket([*family*[,*type*[*proto*]]])
 - type constants should be: SOCK_STREAM (default), SOCK_DGRAM, SOCK_RAW
 - proto constants should be: 0 (default), IPPROTO_RAW
 
-## STREAM AND DATAGRAM SOCKET DEMOS
-- 
+## Socket API Functions
+- socket() creates a new socket of a certain type, identified by an integer number, and allocates system resources to it.
+- bind() is typically used on the server-side, and associates a socket with a socket address structure, i.e. a specified local IP address and a port number.
+- listen() is used on the server-side, and causes a bound TCP socket to enter listening state.
+- connect() is used on the client-side, and assigns a free local port number to a socket. In the case of a TCP socket, it causes an attempt to establish a new TCP connection.
+- accept() is used on the server-side. It accepts a received incoming attempt to create a new TCP connection from the remote client, and creates a new socket associated with the socket address pair of this connection.
+- send(), sendall(), recv(), sendto(), and recvfrom() are used for sending and receiving data. The standard functions write() and read() may also be used.
+- close() causes the system to release resources allocated to a socket. In case of TCP, the connection is terminated.
+- gethostbyname() and gethostbyaddr() are used to resolve hostnames and addresses. IPv4 only.
+- select() is used to suspend, waiting for one or more of a provided list of sockets to be ready to read, ready to write, or that have errors.
+- poll() is used to check on the state of a socket in a set of sockets. The set can be tested to see if any socket can be written to, read from or if an error occurred.
+- getsockopt() is used to retrieve the current value of a particular socket option for the specified socket.
+- setsockopt() is used to set a particular socket option for the specified socket.
 
+## RAW IPV4 SOCKETS
+- Raw Socket scripts must include the IP header and the next headers.
+- Requires guidance from the "Request for Comments" (RFC)to follow header structure properly.
+  - RFCs contain technical and organizational documents about the Internet, including specifications and policy documents.
+- See RFC 791, Section 3 - Specification for details on how to construct an IPv4 header.
 
+## RAW SOCKET USE CASE
+- Testing specific defense mechanisms - such as triggering and IDS for an effect, or filtering
+- Avoiding defense mechanisms
+- Obfuscating data during transfer
+- Manually crafting a packet with the chosen data in header fields
