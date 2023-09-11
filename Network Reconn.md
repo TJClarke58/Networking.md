@@ -82,8 +82,8 @@ site:*.ccboe.net "Powered by"
     - Wide range target scan
     - Target specific scan
   - Method
-    - Single source scan
-    - Distributed scan
+    - Single source scan - operates from a one to many fashion
+    - Distributed scan - multiple systems in a union to scan a network or host of interest
 - Broadcast Ping and Ping sweep
   ```
   fping -g -a 10.1.0.0/24
