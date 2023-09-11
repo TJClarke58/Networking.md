@@ -203,3 +203,14 @@ nc [Options] [Target IP] [Target Port]
 
 ## NETWORK MAPPING
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/9be8d089-e370-4acb-9840-a7038bdfd68b)
+
+## Situational Awareness
+- Where am I? (uname -n/hostname)
+- Who Am I? (whoami/id)
+- Who else is on here? (who/w)
+- What am I allowed to do? (sudo -l)
+- What ports are open? (netstat -anlptu/ss -nlptu) RUN SUDO
+- Are there any special services running? (ps -elf)
+- What interfaces do I have? (ifconfig/ip addr (ip a))
+- What other hosts does this box know? (arp -a/ip n)
+- What routes/networks does this host know? (route/ip r)
