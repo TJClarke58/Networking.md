@@ -85,6 +85,8 @@ site:*.ccboe.net "Powered by"
     - Single source scan - operates from a one to many fashion
     - Distributed scan - multiple systems in a union to scan a network or host of interest
 - Broadcast Ping and Ping sweep
+  - Broadcast - broadcast ping sends an ICMP echo request to the network broadcast address.
+  - Ping Sweep - sends an ICMP echo request to every usable address on a network.
   ```
   fping -g -a 10.1.0.0/24
   nmap –sn 10.0.0.0/24 (was -sP which is now deprecated)
