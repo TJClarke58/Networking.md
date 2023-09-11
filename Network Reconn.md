@@ -85,23 +85,113 @@ site:*.ccboe.net "Powered by"
     - Single source scan
     - Distributed scan
 - Broadcast Ping and Ping sweep
+  ```
+  fping -g -a 10.1.0.0/24
+  nmap –sn 10.0.0.0/24 (was -sP which is now deprecated)
+  for i in {1..254}; do ping -c 1 -W 1 10.1.1.$i | grep 'from'; done
+  ```
+  
 - ARP scan
+  ```
+  sudo arp-scan --interface=eth0 --localnet
+  sudo arp-scan --interface=eth0 10.1.0.0/24
+  arping –c 1 –i eth0 172.16.32.2 (can only scan a single host, results vary)
+  for ip in $(sew 1 254) ; do if ping -c 1 10.1.0.$ip>/dev/null; then echo "10.1.0.$ip UP"; fi ;done
+  nmap –PR 172.16.32.2(legitimate scan that often does not show results)
+  nmap -PR -6 fe80::f816:3eff:fed9:5116/64(takes a long time to run)
+  ```
+  
 - SYN scan
+  ```
+  nmap –sS 172.16.32.2
+  hping3 172.16.32.2 -S -V -p 443
+  ```
+  
 - Full connect scan
+  ```
+  nmap –sT –sV 10.16.32.23
+  (Full TCP connect, service versioning)
+  nmap –sT 172.16.32.2
+  ```
 - Null scan
+  ```
+  nmap -sN 10.50.1.1
+  hping3 -c 1 -V -p 80 -s 5050 -Y 10.50.1.1
+  ```
+  
 - FIN scan
+  ```
+  nmap -sF 25.50.75.100
+  hping3 -c 1 -V -p 80 -s 5050 -F 25.50.75.100
+  ```
+  
 - XMAS tree scan
+  ```
+  nmap -sX 7.92.5.19
+  hping3 -c 1 -V -p 80 -s 5050 -M 0 -UPF 7.92.5.19
+  ```
+  
 - UDP scan
+  ```
+  namp -sU -v 10.10.100.3
+  ```
+  
 - Idle scan
+  ```
+  nmap -sI 10.10.5.6 25.23.4.7
+  ```
+  
 - ACK/Window scan
+  ```
+  nmap -sW 10.66.35.10
+  ```
+  
 - RPC scan
+  ```
+  nmap -sR 10.50.22.29
+  ```
+  
 - FTP scan
+  ```
+  nmap -b 10.1.1.3 10.2.5.1
+  ```
+  
 - decoy scan
+  ```
+  nmap -D 1.2.3.4, 5.6.7.8,ME 100.200.10.20
+  ```
 - OS fingerprinting scan
+  ```
+  nmap -O 6.2.9.5
+  ```
+  
 - version scan
+  ```
+  nmap -sV 10.30.50.70
+  ```
+  
+- Maimon scan
+  ```
+  nmap -sM 10.90.20.80
+  ```
+  
 - Protocol ping
+  ```
+  nmap -PO 43.76.12.93
+  ```
+  
 - Discovery probes
+  - ICMP (nmap -PE 88.55.22.77)
+  - Timestamp (nmap -PP 10.9.8.7)
+  - Netmask (nmap -PM -Pn 5.3.7.9)
+  - TCP SYN (nmap -PS21-50 55.66.77.22)
+  - TCP ACK (nmap -PA21-50 1.9.2.8 or hping3 -c 1 -V -p 80 -s 5050 -A 10.9.2.8 (TCP ACK Scan)
+  - UDP (nmap -PU21-50 45.60.75.90)
+    
 - SCTP INIT scan
+  ```
+  nmap -sY 17.34.51.68
+  ```
 
 ## NETWORK SCANNING - CODE
 ```
