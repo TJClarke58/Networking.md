@@ -214,3 +214,25 @@ nc [Options] [Target IP] [Target Port]
 - What interfaces do I have? (ifconfig/ip addr (ip a))
 - What other hosts does this box know? (arp -a/ip n)
 - What routes/networks does this host know? (route/ip r)
+
+# Vyos router
+```
+ssh vyos@172.16.20.1
+```
+password: password
+
+- Similar command shown above
+- Different commands
+  - show int
+  - show config
+ 
+# NMAP syntax
+```
+nmap 172.16.82.106 -Pn -p 3000-3999 -T4 --min-rate 10000 -A -vvvv
+```
+```
+nmap 172.16.82.1-10  -p 1-1000,2552  -T4 --min-rate 10000 -A -vvvv -Pn
+```
+```
+nmap 172.16.82.1/29  -p-  -T4 --min-rate 10000 -A -vvvv -Pn
+```
