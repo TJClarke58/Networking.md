@@ -109,6 +109,9 @@ Client (receive file): nc 10.2.0.2 9001 > newfile.txt
 ```
 
 ## NETCAT RELAY DEMOS
+- PC1 = nc -lp <port>
+- PC2 = nc <PC1 IP><port> 0<pipe | nc <PC3 IP><port> 1>pipe
+- PC3 = nc -lp <port>
 - On Client Relay:
   ```
   mknod mypipe p
