@@ -306,4 +306,32 @@ ssh localhost -p 2222
   - DNS
   - HTTP
 
-hi
+# SSH Tunnling Notes (BOUND BY THE LOOP BACK ADDRESS)
+- From PC1 (SSH user@S1 -L 42200:S2:80 -NT) and (SSH user@S1 -L 42201:S2:23 -NT)
+  - nmap
+  - port 22 open and ip found, have creds (SSH onto S1)
+  - nc 127.0.0.1 42200 (banner grab)
+  - wget -r 127.0.0.1:42200
+  - nc 127.0.0.1 42201 (banner grab)
+  - telnet 127.0.0.1 42201
+  - Try to get to S2
+    - (SSH user@S1 -L 42202:127.0.0.1:42299 -NT)
+    - ssh user@127.0.0.1 -p 42202 -L 42203:127.0.0.1:21 -NT
+    - ssh user@127.0.0.1 -p 42202 -D 9050 -NT
+    - proxychains wget -r ftp://127.0.0.1
+    - proxychains ./scan.sh or nmap PC2 -Pn -A -T4 -vvvv
+    - proxychains wget - r PC2
+    - proxychains ssh PC2@PC2
+- S1 (ping S2)
+  - nmap
+  - port 23 and 80 are open on S2
+  - From s2 we are on S1
+  - nc 127.0.0.1 42299
+- S2
+  - situational awarness 
+  - port 21,22 open
+  - (SSH user@S1 -R 42299:127.0.0.1:22 -NT)
+- NT (non-interactive terminal
+  - can't do stuff in that terminal) 
+
+  
