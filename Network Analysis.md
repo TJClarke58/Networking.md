@@ -36,6 +36,9 @@
 - I/O Graph
 - IPv4 and IPv6 Statistics
 - Expert Information
+```
+sudo tcpdump -r analysis-demo.pcap 'tcp[13] = 0x02' | awk '{print $3}' | cut -d. -f1,2,3,4 | sort | uniq -c
+```
 
 ## NETWORK DATA TYPES
 - Full Packet Capture Data
