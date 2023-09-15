@@ -183,3 +183,123 @@ iptables -t [table] -A [chain] [rules] -j [action]
 - arp - layer 2
 - bridge - processing traffic/packets traversing bridges.
 - netdev - allows for user classification of packets - nftables passes up to the networking stack (no counterpart in iptables)
+
+## NFTABLE ENHANCEMENTS
+- One table command to replace:
+  - iptables
+  - ip6tables
+  - arptables
+  - ebtables
+- simpler, cleaner syntax
+- less code duplication resulting in faster execution
+- simultaneous configuration of IPv4 and IPv6
+
+## NFTABLES HOOKS
+- ingress - netdev only
+- prerouting
+- input
+- forward
+- output
+- postrouting
+
+## INTRODUCES CHAIN-TYPES
+- There are three chain types:
+  - filter - to filter packets - can be used with arp, bridge, ip, ip6, and inet families
+  - route - to reroute packets - can be used with ip and ipv6 families only
+  - nat - used for Network Address Translation - used with ip and ip6 table families only
+ 
+## NFTABLES SYNTAX
+
+### 1. CREATE THE TABLE
+- nft add table [family] [table]
+  - [family] = ip*, ip6, inet, arp, bridge and netdev.
+  - [table] = user provided name for the table.
+
+### 2. CREATE THE BASE CHAIN
+```
+nft add chain [family] [table] [chain] { type [type] hook [hook]
+    priority [priority] \; policy [policy] \;}
+```
+- * [chain] = User defined name for the chain.
+- * [type] =  can be filter, route or nat.
+- * [hook] = prerouting, ingress, input, forward, output or
+         postrouting.
+- * [priority] = user provided integer. Lower number = higher
+             priority. default = 0. Use "--" before
+             negative numbers.
+- * ; [policy] ; = set policy for the chain. Can be
+              accept (default) or drop.
+- Use "\" to escape the ";" in bash
+
+### 3. CREATE A RULE IN THE CHAIN
+- nft add rule [family] [table] [chain] [matches (matches)] [statement]
+  - * [matches] = typically protocol headers(i.e. ip, ip6, tcp,
+            udp, icmp, ether, etc)
+  - * (matches) = these are specific to the [matches] field.
+  - * [statement] = action performed when packet is matched. Some
+              examples are: log, accept, drop, reject,
+              counter, nat (dnat, snat, masquerade)
+
+## RULE MATCH OPTIONS
+- ip [ saddr | daddr { ip | ip1-ip2 | ip/CIDR | ip1, ip2, ip3 } ]
+- tcp flags { syn, ack, psh, rst, fin }
+- tcp [ sport | dport { port1 | port1-port2 | port1, port2, port3 } ]
+- udp [ sport| dport { port1 | port1-port2 | port1, port2, port3 } ]
+- icmp [ type | code { type# | code# } ]
+- ct state { new, established, related, invalid, untracked }
+- iif [iface]
+- oif [iface]
+
+## MODIFY NFTABLES
+- nft { list | flush } ruleset
+- nft { delete | list | flush } table [family] [table]
+- nft { delete | list | flush } chain [family] [table] [chain]
+
+## MODIFY NFTABLES
+- List table with handle numbers
+  - nft list table [family] [table] [-a]
+- Adds after position
+  - nft add rule [family] [table] [chain] [position <position>] [matches] [statement]
+- Inserts before position
+  - nft insert rule [family] [table] [chain] [position <position>] [matches] [statement]
+- Replaces rule at handle
+  - nft replace rule [family] [table] [chain] [handle <handle>] [matches] [statement]
+- Deletes rule at handle
+  - nft delete rule [family] [table] [chain] [handle <handle>]
+
+## MODIFY NFTABLES
+- To change the current policy
+  - nft add chain [family] [table] [chain] { \; policy [policy] \;}
+ 
+# CONFIGURE IPTABLES NAT RULES
+
+## NAT & PAT OPERATORS & CHAINS
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/b3639c13-4768-4c6f-b6c0-3c7a0b05a7b6)
+
+## SOURCE NAT
+```
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+```
+- iptables -t nat -A POSTROUTING -o eth0 -s 192.168.0.1 -j SNAT --to 1.
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/bbece352-7e00-4bfc-bcca-088509874d27)
+- iptables -t nat -A POSTROUTING -p tcp -o eth0 -s 192.168.0.1 -j SNAT --to 1.1.1.1:9001
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/8841634d-f51d-4de7-ac77-bcd52d5def52)
+
+## DESTINATION NAT
+- iptables -t nat -A PREROUTING -i eth0 -d 8.8.8.8 -j DNAT --to 10.0.0.1
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/8014b8d9-4fae-46cf-a8e7-87c029315443)
+
+## DESTINATION NAT
+- iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j DNAT --to 10.0.0.1:22
+- iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to 10.0.0.2:80
+- iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j DNAT --to 10.0.0.3:443
+- iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+# CONFIGURE NFTABLES NAT RULES
+
+## CREATING NAT TABLES AND CHAINS
+- Create the NAT table
+  - nft add table ip NAT
+- Create the NAT chains
+  - nft add chain ip NAT PREROUTING { type nat hook prerouting priority 0 \; }
+  - nft add chain ip NAT POSTROUTING { type nat hook postrouting priority 0 \; }
