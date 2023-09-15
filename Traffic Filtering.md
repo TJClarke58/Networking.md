@@ -303,3 +303,27 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 - Create the NAT chains
   - nft add chain ip NAT PREROUTING { type nat hook prerouting priority 0 \; }
   - nft add chain ip NAT POSTROUTING { type nat hook postrouting priority 0 \; }
+
+## SOURCE NAT
+- nft add rule ip NAT POSTROUTING ip saddr 10.10.0.40 oif eth0 snat 144.15.60.11
+- nft add rule ip NAT POSTROUTING oif eth0 masquerade
+
+## DESTINATION NAT
+- nft add rule ip NAT PREROUTING iif eth0 ip daddr 144.15.60.11 dnat 10.10.0.40
+- nft add rule ip NAT PREROUTING iif eth0 tcp dport { 80, 443 } dnat 10.1.0.3
+- nft add rule ip NAT PREROUTING iif eth0 tcp dport 80 redirect to 8080
+
+# CONFIGURE IPTABLES MANGLE RULES
+
+## MANGLE EXAMPLES WITH IPTABLES
+- iptables -t mangle -A POSTROUTING -o eth0 -j TTL --ttl-set 128
+- iptables -t mangle -A POSTROUTING -o eth0 -j DSCP --set-dscp 26
+
+# CONFIGURE NFTABLES MANGLE RULES
+
+## MANGLE EXAMPLES WITH NFTABLES
+- nft add table ip MANGLE
+- nft add chain ip MANGLE INPUT {type filter hook input priority 0 \; policy accept \;}
+- nft add chain ip MANGLE OUTPUT {type filter hook output priority 0 \; policy accept \;}
+- nft add rule ip MANGLE OUTPUT oif eth0 ip ttl set 128
+- nft add rule ip MANGLE OUTPUT oif eth0 ip dscp set 26
