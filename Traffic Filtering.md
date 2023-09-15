@@ -1,4 +1,4 @@
-# Traffic Filtering
+Fsoruce# Traffic Filtering
 
 - x11 filter (terminator)
 ```
@@ -285,7 +285,7 @@ nft add chain [family] [table] [chain] { type [type] hook [hook]
 ```
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
-- iptables -t nat -A POSTROUTING -o eth0 -s 192.168.0.1 -j SNAT --to 1.
+- iptables -t nat -A POSTROUTING -o eth0 -s 192.168.0.1 -j SNAT --to 1.1.1.1
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/bbece352-7e00-4bfc-bcca-088509874d27)
 - iptables -t nat -A POSTROUTING -p tcp -o eth0 -s 192.168.0.1 -j SNAT --to 1.1.1.1:9001
 ![image](https://github.com/TJClarke58/Networking.md/assets/140441047/8841634d-f51d-4de7-ac77-bcd52d5def52)
