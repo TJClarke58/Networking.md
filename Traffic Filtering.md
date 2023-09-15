@@ -1,5 +1,10 @@
 # Traffic Filtering
 
+- x11 filter (terminator)
+```
+sudo iptables -A INPUT -p tcp -m multiport  --ports 6010,6011,6012 -j ACCEPT
+```
+
 ## WHY FILTER TRAFFIC?
 - Block malicious traffic
 - Decrease load on network infrastructure
@@ -327,3 +332,121 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 - nft add chain ip MANGLE OUTPUT {type filter hook output priority 0 \; policy accept \;}
 - nft add rule ip MANGLE OUTPUT oif eth0 ip ttl set 128
 - nft add rule ip MANGLE OUTPUT oif eth0 ip dscp set 26
+
+# UNDERSTAND NETWORK BASED FILTERING
+
+## DESCRIBE FIREWALL TYPE
+- Zone-Based Policy Firewall (Zone-Policy Firewall, ZBF or ZFW)
+- Host Based Firewalls
+- Network Based Firewalls
+
+## INTERPRET A DATA FLOW DIAGRAM GIVEN A SET OF FIREWALL RULES
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/c6a65922-690c-41e3-a6c8-72a3f3d3446f)
+
+## DETERMINE POSITIONING OF FILTERING DEVICES ON A NETWORK
+1. Determine network segments
+2. Conduct Audit
+3. Filtering devices we need
+4. Device placement
+
+## TYPICAL LOCATIONS FOR FILTERING DEVICES
+- IPS
+- Firewalls
+- Routers
+- Switches
+
+## FILTERING DEVICE PLACEMENT EXAMPLE
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/eb2a327c-2b4a-4277-9aa0-a847caa5bcf7)
+
+# INTERPRET CISCO ACCESS CONTROL LIST (ACL)
+
+## ACL NUMBERING & NAMING CONVENTIONS
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/a0869e72-4589-44b2-af06-ed3717cd3d84)
+
+## SYNTAX TO CREATE ACCESS LISTS
+- Demo> enable #enter privileged exec mode
+- Demo# configure terminal #enter global config mode
+- Demo(config)# access-list 37 ... (output omitted) ...
+- Demo(config)# ip access-list standard block_echo_request
+- Demo(config)# access-list 123  ... (output omitted) ...
+- Demo(config)# ip access-list extended zone_transfers
+
+STANDARD NUMBERED ACL SYNTAX
+- router(config)# access-list {1-99 | 1300-1999}  {permit|deny}  {source IP add} {source wildcard mask}
+- router(config)#  access-list 10 permit host 10.0.0.1
+- router(config)#  access-list 10 deny 10.0.0.0 0.255.255.255
+- router(config)#  access-list 10 permit any
+
+## STANDARD NAMED ACL SYNTAX
+- router(config)# ip access-list standard [name]
+- router(config-std-nacl)# {permit | deny}  {source ip add}  {source wildcard mask}
+- router(config)#  ip access-list standard CCTC-STD
+- router(config-std-nacl)#  permit host 10.0.0.1
+- router(config-std-nacl)#  deny 10.0.0.0 0.255.255.255
+- router(config-std-nacl)#  permit any
+
+## EXTENDED NUMBERED ACL SYNTAX
+- router(config)# access-list {100-199 | 2000-2699} {permit | deny} {protocol}
+                {source IP add & wildcard} {operand: eq|lt|gt|neq}
+                {port# |protocol} {dest IP add & wildcard} {operand: eq|lt|gt|neq}
+                {port# |protocol}
+- router(config)# access-list 144 permit tcp host 10.0.0.1 any eq 22
+- router(config)# access-list 144 deny tcp 10.0.0.0 0.255.255.255 any eq telnet
+- router(config)# access-list 144 permit icmp 10.0.0.0 0.255.255.255 192.168.0.0
+                0.0.255.255 echo
+- router(config)# access-list 144 deny icmp 10.0.0.0 0.255.255.255 192.168.0.0
+                0.0.255.255 echo-reply
+- router(config)# access-list 144 permit ip any any
+
+## ACLS CAN BE USED FOR:
+1. Filtering traffic in/out of a network interface.
+2. Permit or deny traffic to/from a router VTY line.
+3. Identify authorized users and traffic to perform NAT.
+4. Classify traffic for Quality of Service (QoS).
+5. Trigger dial-on-demand (DDR) calls.
+6. Control Bandwidth.
+7. Limit debug command output.
+8. Restrict the content of routing updates.
+
+## ACLS RULES
+1. One ACL per interface, protocol and direction
+2. Must contain one permit statement
+3. Read top down
+4. Inbound processed before routing
+5. Outbound processed after routing
+6. Does not apply for SSH or telnet traffic to device
+7. Does not apply to traffic from the device
+8. Only standard ACLs on VTY lines
+
+## APPLY AN ACL TO AN INTERFACE OR LINE
+- router(config)#  interface {type} {mod/slot/port}
+- router(config)#  ip access-group {ACL# | name} {in | out}
+- router(config)#  interface s0/0/0
+- router(config-if)#  ip access-group 10 out
+- router(config)#  interface g0/1/1
+- router(config-if)#  ip access-group CCTC-EXT in
+- router(config)#  line vty 0 15
+- router(config)#  access-class CCTC-STD in
+
+# ACL PLACEMENT
+
+## ACL PLACEMENT 1
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/789a2f10-3283-439f-a284-cbcbc9310cf1)
+- Where would you place a Standard ACL (Router and Interface) to block traffic from host 10.3.0.4 to host 10.5.0.7? Would it be in or outbound?
+
+## ACL PLACEMENT 2
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/38e7ff3b-8acb-4186-82b7-43118f609695)
+- Where would you place an Extended ACL to block traffic from host 10.1.0.1 to 10.5.0.17? Would it be in or outbound?
+
+## ACL PLACEMENT 3
+- Interpret this ACL:
+  - ip access-list 101 deny udp host 19.3.0.29 10.5.0.0 0.0.0.255 eq 69
+  - ip access-list 101 deny tcp any 10.3.0.0 0.0.0.255 eq 22
+  - ip access-list 101 deny tcp any 10.1.0.0 0.0.0.255 eq 23
+  - ip access-list 101 deny icmp any 10.5.0.0 0.0.0.255 echo
+  - ip access-list 101 deny icmp any 10.5.0.0 0.0.0.255 echo-reply
+- What Type of list is this?
+- What would it do?
+- Where should it be placed (use diagram on previous slide)?
+- What direction?
+
