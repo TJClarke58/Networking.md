@@ -450,3 +450,138 @@ STANDARD NUMBERED ACL SYNTAX
 - Where should it be placed (use diagram on previous slide)?
 - What direction?
 
+# UNDERSTAND INTRUSION DETECTION OR PREVENTION SYSTEMS
+
+## CONTRAST INTRUSION DETECTION SYSTEMS AND INTRUSION PREVENTION SYSTEMS
+- Placement
+  - In line
+  - or not
+ 
+## COMMON IDS AND IPS
+![image](https://github.com/TJClarke58/Networking.md/assets/140441047/a6198d62-034b-4b39-85f3-407d77f3354e)
+
+## DISCUSS SIGNATURE VS BEHAVIOR BASED DETECTION
+- Recognition Methods
+  - Signature
+  - Heuristic aka Behavioral
+
+## CONSTRUCT ADVANCED IDS (SNORT) RULES
+- Installation Directory
+  - /etc/snort
+- Configuration File
+  - /etc/snort/snort.conf
+- Rules Directory
+  - /etc/snort/rules
+ 
+## CONSTRUCT ADVANCED IDS (SNORT) RULES
+- Rule naming
+  - [name].rules
+- Default Log Directory
+  - /var/log/snort
+ 
+## CONSTRUCT ADVANCED IDS (SNORT) RULES
+- Common line switches
+- -D - to run snort as a daemon
+- -c - to specify a configuration file when running snort
+- -l - specify a log directory
+- -r - to have snort read a pcap file
+
+## CONSTRUCT ADVANCED IDS (SNORT) RULES
+- To run snort as a Daemon
+  - sudo snort -D -c /etc/snort/snort.conf -l /var/log/snort
+- To run snort against a PCAP
+  - sudo snort -c /etc/snort/rules/file.rules -r file.pcap
+
+## SNORT IDS/IPS RULE - HEADER
+- [action] [protocol] [s.ip] [s.port] [direction] [d.ip] [d.port] ( match conditions ;)
+  - * Action - alert, log, pass, drop, or reject
+  - * Protocol - TCP, UDP, ICMP, or IP
+  - * Source IP address - one IP, network, [IP range], or any
+  - * Source Port - one, [multiple], any, or [range of ports]
+  - * Direction - source to destination or both
+  - * Destination IP address - one IP, network, [IP range], or any
+  - * Destination port - one, [multiple], any, or [range of ports]
+
+## SNORT RULE OPTIONS
+- Categories
+  - General
+  - Payload detection
+  - Non-Payload detection
+  - Post detection
+  - Thresholding and suppression
+ 
+## SNORT IDS/IPS GENERAL RULE OPTIONS:
+- * msg:"text" - specifies the human-readable alert message
+- * reference: - links to external source of the rule
+- * sid: - used to uniquely identify Snort rules
+- * rev: - uniquely identify revisions of Snort rules
+- * classtype: - used to describe what a successful attack would do
+- * priority: - level of concern (1 - really bad, 2 - badish, 3 - informational)
+- * metadata: - allows a rule writer to embed additional information about the rule
+
+## SNORT IDS/IPS PAYLOAD DETECTION OPTIONS:
+- * content:"text" - looks for a string of text.
+- * content:"|binary data|" - to look for a string of binary HEX
+- * nocase - modified content, makes it case insensitive
+- * depth: - specify how many bytes into a packet Snort should search for the
+          specified pattern
+- * distance: - how far into a packet Snort should ignore before starting to
+             search for the specified pattern relative to the end of the
+             previous pattern match
+- * within: - modifier that makes sure that at most N bytes are between pattern
+           matches using the content keyword
+- * offset: - skips a certain number of bytes before searching (i.e. offset: 12)
+
+##SNORT IDS/IPS NON-PAYLOAD DETECTION OPTIONS:
+- * flow: - direction (to/from client and server) and state of connection
+         (established, stateless, stream/no stream)
+- * ttl: - The ttl keyword is used to check the IP time-to-live value.
+- * tos: - The tos keyword is used to check the IP TOS field for a specific value.
+- * ipopts: - The ipopts keyword is used to check if a specific IP option is present
+- * seq: - check for a specific TCP sequence number
+- * ack: - check for a specific TCP acknowledge number.
+- * flags: - The flags keyword is used to check if specific TCP flag bits are present.
+- * itype: - The itype keyword is used to check for a specific ICMP type value.
+- * icode: - The icode keyword is used to check for a specific ICMP code value.
+
+## SNORT IDS/IPS POST DETECTION OPTIONS:
+- * logto: - The logto keyword tells Snort to log all packets that trigger this rule to
+          a special output log file.
+- * session: - The session keyword is built to extract user data from TCP Sessions.
+- * react: - This keyword implements an ability for users to react to traffic that
+          matches a Snort rule by closing connection and sending a notice.
+- * tag: - The tag keyword allow rules to log more than just the single packet that
+        triggered the rule.
+- * activates: - This keyword allows the rule writer to specify a rule to add when a
+              specific network event occurs.
+- * activated_by: - This keyword allows the rule writer to dynamically enable a rule
+                 when a specific activate rule is triggered.
+- * count: - Allows the rule writer to specify how many packets to leave the rule
+          enabled for after it is activated.
+
+## SNORT IDS/IPS THRESHOLDING AND SUPPRESSION OPTIONS:
+- threshold: type [limit | threshold | both], track [by_src | by_dst], count [#], seconds [seconds]
+  - * limit - alerts on the 1st event during defined period then ignores the rest.
+  - * threshold - alerts every [x] times during defined period.
+  - * both - alerts once per time internal after seeing [x] amount of occurrences
+         of event. It then ignores all other events during period.
+  - * track - rate is tracked either by source IP address, or destination IP address
+  - * count - number of rule matching in [s] seconds that will cause event_filter
+          limit to be exceeded
+  - * seconds - time period over which count is accrued. [s] must be nonzero
+
+## SNORT RULE EXAMPLE
+- Look for anonymous ftp traffic:
+  - alert tcp any any -> any 21 (msg:"Anonymous FTP Login"; content: "anonymous"; sid:2121; )
+- This will cause the pattern matcher to start looking at byte 6 in the payload)
+  - alert tcp any any -> any 21 (msg:"Anonymous FTP Login"; content: "anonymous"; offset:5; sid:2121; )
+- This will search the first 14 bytes of the packet looking for the word “anonymous”.
+  - alert tcp any any -> any 21 (msg:"Anonymous FTP Login"; content: "anonymous"; depth:14; sid:2121; )
+- Deactivates the case sensitivity of a text search.
+  - alert tcp any any -> any 21 (msg:"Anonymous FTP Login"; content: "anonymous"; nocase; sid:2121; )
+- ICMP ping sweep
+  - alert icmp any any -> 10.1.0.2 any (msg: "NMAP ping sweep Scan"; dsize:0; sid:10000004; rev: 1; )
+- Look for a specific set of Hex bits (NoOP sled)
+  - alert tcp any any -> any any (msg:"NoOp sled"; content: "|9090 9090 9090|"; sid:9090; rev: 1; )
+- Incorrect telnet login attempt
+  - alert tcp any 23 -> any any (msg:"TELNET login incorrect"; content:"Login incorrect"; nocase; flow:established, from_server; threshold: type both, track by_src, count 3, seconds 30; classtype: bad-unknown; sid:2323; rev:6; )
