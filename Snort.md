@@ -39,6 +39,7 @@
 - depth - specify how many bytes into a packet Snort should search for the specified pattern
 - distance - how far into a packet Snort should ignore before starting to search for the specified pattern relative to the end of the previous pattern match
 - within - modifier that makes sure that at most N bytes are between pattern matches using the content keyword
+- offset - skips a certain number of bytes before searching (i.e. offset: 12)
 
 ## SNORT IDS/IPS NON-PAYLOAD DETECTION OPTIONS:
 - Flow - direction (to/from client and server) and state of connection (established, stateless, stream/no stream)
@@ -66,8 +67,8 @@
   - Threshold alerts every [x] times during defined period.
   - Both alerts once per time internal after seeing [x] amount of occurrences of event. It then ignores all other events during period.
 - track [by_src | by_dst] - rate is tracked either by source IP address, or destination IP address
-  - count [#] - number of rule matching in [s] seconds that will cause event_filter limit to be exceeded
-  - seconds [seconds] - time period over which count is accrued. [s] must be nonzero value
+- count [#] - number of rule matching in [s] seconds that will cause event_filter limit to be exceeded
+- seconds [seconds] - time period over which count is accrued. [s] must be nonzero value
 
 ## SNORT RULE EXAMPLE
 - Look for anonymous ftp traffic:
