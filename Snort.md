@@ -85,7 +85,7 @@
   ```
 - Deactivates the case sensitivity of a text search.
   ```
-  alert tcp any any -> any 21 (msg:"Anonymous FTP Login"; content:
+  alert tcp any any -> any 21 (msg:"Anonymous FTP Login"; content: "anonymous"; nocase; sid:2121; )
   ```
 
 ## RULE HEADER
@@ -100,7 +100,7 @@
 - Incorrect telnet login attempt
   ```
   alert tcp any 23 -> any any (msg:"TELNET login incorrect"; content:"Login incorrect";
-  flow:established,from_server; classtype:bad-unknown; sid:2323; rev
+  flow:established,from_server; classtype:bad-unknown; sid:2323; rev:6; )
   ```
 
 # FAILED IDS/IPS
